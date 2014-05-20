@@ -1,0 +1,67 @@
+Ruby notes:
+**********
+template place:
+app/views/layouts
+************
+save html files as .rhtml
+************
+
+using devise gem to make sign in and up:
+add in Gemfile:
+
+gem 'devise'
+
+*******************
+
+run command:
+
+bundle install
+
+****************
+
+Set up devise in your app
+
+rails g devise:install
+
+***********************
+
+Configure Devise
+
+config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+before the end keyword.
+
+****************************
+
+Open up app/views/layouts/application.html.erb and add:
+
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+
+
+right above
+
+<%= yield %>
+
+********************************
+
+We’ll use a bundled generator script to create the User model.
+
+rails g devise user
+rake db:migrate
+
+
+devise session
+
+{"session_id"=>"be02f27d504672bab3408a0ccf5c1db5", "_csrf_token"=>"DKaCNX3/DMloaCHbVSNq33NJjYIg51X0z/p2T1VRzfY=", "warden.user.user.key"=>["User", [3], "$2a$10$5HFWNuz5p6fT3Z4ZvJfQq."]}
+
+
+
+User.find(session["warden.user.user.key"][1][0])
+
+
+
