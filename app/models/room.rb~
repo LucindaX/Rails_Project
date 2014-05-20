@@ -1,0 +1,6 @@
+class Room < ActiveRecord::Base
+  attr_accessible :type, :price, :descs ,:hotel_id, :avatar ,:quantity
+  belongs_to :hotel
+  mount_uploader :avatar, AvatarUploader
+  has_many :booked_rooms
+end

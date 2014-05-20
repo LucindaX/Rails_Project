@@ -1,0 +1,43 @@
+<%= form_for(@room, :html => {:multipart => true}) do |f| %>
+  <% if @room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+      <% @room.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.number_field :price, :class => 'text_field', :step => 'any' %>
+  </div>
+
+    <div class="field">
+    <%= f.label :quantity %><br />
+    <%= f.number_field :quantity, :class => 'text_field' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_area :descs %>
+  </div>
+  <div class="field">
+    <%= f.label :hotel %><br />
+    <%=  f.select :hotel_id, options_for_select(Hotel.all.map{ |s| [s.name, s.id] }) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

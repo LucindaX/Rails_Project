@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Room:</b>
+  <%= @booked_room.room %>
+</p>
+
+<p>
+  <b>From date:</b>
+  <%= @booked_room.from_date %>
+</p>
+
+<p>
+  <b>To date:</b>
+  <%= @booked_room.to_date %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @booked_room.quantity %>
+</p>
+
+<p>
+  <b>Hotel:</b>
+  <%= @booked_room.hotel %>
+</p>
+
+
+<%= link_to 'Edit', edit_booked_room_path(@booked_room) %> |
+<%= link_to 'Back', booked_rooms_path %>

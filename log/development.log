@@ -1,0 +1,1280 @@
+  [1m[36m (10.5ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (41.5ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateHotels (20140519121117)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateHotels (20140519121117)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateHotels (20140519121117)
+  [1m[35m (10.2ms)[0m  CREATE TABLE `hotels` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(25) NOT NULL, `avatar` varchar(50) NOT NULL, `city` varchar(25) NOT NULL, `country` varchar(25) NOT NULL, `desc` text NOT NULL, `rating` decimal NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.7ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20140519121117')
+  [1m[36m (6.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateRooms (20140519121931)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateRooms (20140519121931)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateRooms (20140519121931)
+  [1m[35m (10.1ms)[0m  CREATE TABLE `rooms` (`id` int(11) auto_increment PRIMARY KEY, `room_type` varchar(50) NOT NULL, `avatar` varchar(50) NOT NULL, `rating` decimal NOT NULL, `quantity` decimal NOT NULL, `descs` text NOT NULL, `price` decimal NOT NULL, `hotel_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (31.3ms)[0m  [1mCREATE  INDEX `index_rooms_on_hotel_id`  ON `rooms` (`hotel_id`) [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20140519121931')[0m
+  [1m[35m (6.0ms)[0m  COMMIT
+Migrating to CreateBookedRooms (20140519122320)
+  [1m[36m (9.9ms)[0m  [1mCREATE TABLE `booked_rooms` (`id` int(11) auto_increment PRIMARY KEY, `from_date` date NOT NULL, `to_date` date NOT NULL, `quantity` int(11) NOT NULL, `descs` varchar(255) NOT NULL, `room_id` int(11), `hotel_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (38.7ms)[0m  CREATE  INDEX `index_booked_rooms_on_hotel_id`  ON `booked_rooms` (`hotel_id`) 
+  [1m[36m (31.3ms)[0m  [1mCREATE  INDEX `index_booked_rooms_on_room_id`  ON `booked_rooms` (`room_id`) [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20140519122320')[0m
+  [1m[35m (6.2ms)[0m  COMMIT
+Migrating to CreateUsers (20140519122443)
+  [1m[36m (10.2ms)[0m  [1mCREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `username` varchar(20) NOT NULL, `password` varchar(32) NOT NULL, `email` varchar(30) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20140519122443')[0m
+  [1m[35m (6.0ms)[0m  COMMIT
+Migrating to CreateComments (20140519122616)
+  [1m[36m (10.1ms)[0m  [1mCREATE TABLE `comments` (`id` int(11) auto_increment PRIMARY KEY, `user_id` int(11), `head` varchar(50) NOT NULL, `body` text NOT NULL, `rating` decimal NOT NULL, `hotel_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (33.6ms)[0m  CREATE  INDEX `index_comments_on_user_id`  ON `comments` (`user_id`) 
+  [1m[36m (31.5ms)[0m  [1mCREATE  INDEX `index_comments_on_hotel_id`  ON `comments` (`hotel_id`) [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20140519122616')[0m
+  [1m[35m (6.2ms)[0m  COMMIT
+Migrating to CreateHotelPics (20140519122732)
+  [1m[36m (9.9ms)[0m  [1mCREATE TABLE `hotel_pics` (`id` int(11) auto_increment PRIMARY KEY, `path` varchar(50) NOT NULL, `hotel_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (31.3ms)[0m  CREATE  INDEX `index_hotel_pics_on_hotel_id`  ON `hotel_pics` (`hotel_id`) 
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20140519122732')
+  [1m[36m (6.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+
+
+Started GET "/hotels/new" for 127.0.0.1 at 2014-05-20 12:29:28 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+
+ActionController::RoutingError (No route matches [GET] "/hotels/new"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (28.1ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (41.8ms)
+
+
+Started GET "/hotels/new" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by HotelsController#new as HTML
+  Rendered hotels/_form.html.erb (68.3ms)
+  Rendered hotels/new.html.erb (168.1ms)
+Completed 200 OK in 227ms (Views: 176.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 12:31:37 +0200
+
+
+Started GET "/rooms/new" for 127.0.0.1 at 2014-05-20 12:31:46 +0200
+Processing by RoomsController#new as HTML
+Completed 500 Internal Server Error in 4ms
+
+NoMethodError (undefined method `attr_accessible' for #<Class:0x007f0bd05f2e30>):
+  app/models/room.rb:2:in `<class:Room>'
+  app/models/room.rb:1:in `<top (required)>'
+  app/controllers/rooms_controller.rb:27:in `new'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.7ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.8ms)
+
+
+Started GET "/rooms/new" for 127.0.0.1 at 2014-05-20 12:33:10 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by RoomsController#new as HTML
+  [1m[35mHotel Load (0.3ms)[0m  SELECT `hotels`.* FROM `hotels`
+  Rendered rooms/_form.html.erb (71.8ms)
+  Rendered rooms/new.html.erb (76.6ms)
+Completed 200 OK in 153ms (Views: 102.7ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/booked_rooms/new" for 127.0.0.1 at 2014-05-20 12:33:19 +0200
+Processing by BookedRoomsController#new as HTML
+  [1m[36mRoom Load (0.2ms)[0m  [1mSELECT `rooms`.* FROM `rooms`[0m
+  [1m[35mHotel Load (0.2ms)[0m  SELECT `hotels`.* FROM `hotels`
+  Rendered booked_rooms/_form.html.erb (16.2ms)
+  Rendered booked_rooms/new.html.erb (17.3ms)
+Completed 200 OK in 25ms (Views: 18.6ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/comments/new" for 127.0.0.1 at 2014-05-20 12:33:27 +0200
+Processing by CommentsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  [1m[35mHotel Load (0.1ms)[0m  SELECT `hotels`.* FROM `hotels`
+  Rendered comments/_form.html.erb (10.9ms)
+  Rendered comments/new.html.erb (12.4ms)
+Completed 200 OK in 20ms (Views: 14.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2014-05-20 12:33:32 +0200
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (37.1ms)
+  Rendered users/new.html.erb (38.6ms)
+Completed 200 OK in 43ms (Views: 40.4ms | ActiveRecord: 0.8ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to AddDeviseToUsers (20140520104059)
+  [1m[35m (0.3ms)[0m  ALTER TABLE `users` ADD `email` varchar(255) DEFAULT '' NOT NULL
+Mysql2::Error: Duplicate column name 'email': ALTER TABLE `users` ADD `email` varchar(255) DEFAULT '' NOT NULL
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to DeviseCreateUsers (20140520104450)
+  [1m[35m (0.4ms)[0m  CREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+Mysql2::Error: Table 'users' already exists: CREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to AddDeviseToUsers (20140520104633)
+  [1m[35m (0.3ms)[0m  ALTER TABLE `users` ADD `email` varchar(255) DEFAULT '' NOT NULL
+Mysql2::Error: Table 'Rails.users' doesn't exist: ALTER TABLE `users` ADD `email` varchar(255) DEFAULT '' NOT NULL
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to AddDeviseToUsers (20140520104849)
+  [1m[35m (28.5ms)[0m  ALTER TABLE `users` ADD `email` varchar(255) DEFAULT '' NOT NULL
+  [1m[36m (34.5ms)[0m  [1mALTER TABLE `users` ADD `encrypted_password` varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (31.1ms)[0m  ALTER TABLE `users` ADD `reset_password_token` varchar(255)
+  [1m[36m (28.1ms)[0m  [1mALTER TABLE `users` ADD `reset_password_sent_at` datetime[0m
+  [1m[35m (27.7ms)[0m  ALTER TABLE `users` ADD `remember_created_at` datetime
+  [1m[36m (28.3ms)[0m  [1mALTER TABLE `users` ADD `sign_in_count` int(11) DEFAULT 0 NOT NULL[0m
+  [1m[35m (28.9ms)[0m  ALTER TABLE `users` ADD `current_sign_in_at` datetime
+  [1m[36m (27.8ms)[0m  [1mALTER TABLE `users` ADD `last_sign_in_at` datetime[0m
+  [1m[35m (28.6ms)[0m  ALTER TABLE `users` ADD `current_sign_in_ip` varchar(255)
+  [1m[36m (28.8ms)[0m  [1mALTER TABLE `users` ADD `last_sign_in_ip` varchar(255)[0m
+  [1m[35m (32.0ms)[0m  CREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) 
+  [1m[36m (32.0ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (1.9ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20140520104849')[0m
+  [1m[35m (6.0ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-05-20 12:50:00 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/railties-4.1.1/lib/rails/templates/rails/welcome/index.html.erb (2.8ms)
+Completed 200 OK in 71ms (Views: 31.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/" for 127.0.0.1 at 2014-05-20 12:50:08 +0200
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.9ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (31.4ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (61.2ms)
+
+
+Started GET "/users/" for 127.0.0.1 at 2014-05-20 12:50:38 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.7ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (7.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (60.5ms)
+
+
+Started GET "/users/" for 127.0.0.1 at 2014-05-20 12:50:41 +0200
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.7ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (26.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2014-05-20 12:50:50 +0200
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.4ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (51.4ms)
+
+
+Started GET "/users/" for 127.0.0.1 at 2014-05-20 12:51:24 +0200
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.6ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (26.9ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/shared/_links.erb (1.5ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/sessions/new.html.erb within layouts/application (39.4ms)
+Completed 200 OK in 190ms (Views: 129.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 12:51:35 +0200
+
+
+Started GET "/users/signup" for 127.0.0.1 at 2014-05-20 12:51:45 +0200
+
+ActionController::RoutingError (No route matches [GET] "/users/signup"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (27.4ms)
+
+
+Started GET "/users/sign" for 127.0.0.1 at 2014-05-20 12:52:05 +0200
+
+ActionController::RoutingError (No route matches [GET] "/users/sign"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.7ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (27.3ms)
+
+
+Started GET "/users/signin" for 127.0.0.1 at 2014-05-20 12:52:06 +0200
+
+ActionController::RoutingError (No route matches [GET] "/users/signin"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (27.5ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/shared/_links.erb (0.5ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/sessions/new.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 12ms (Views: 10.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:12 +0200
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/shared/_links.erb (0.6ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/registrations/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:14 +0200
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+Processing by Devise::PasswordsController#new as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/shared/_links.erb (0.4ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/passwords/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 49ms (Views: 46.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:22 +0200
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/shared/_links.erb (0.5ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/sessions/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 12ms (Views: 10.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 12:52:48 +0200
+
+
+Started GET "/users" for 127.0.0.1 at 2014-05-20 13:02:52 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.4ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (29.7ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (60.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2014-05-20 13:06:32 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/shared/_links.erb (1.4ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/sessions/new.html.erb within layouts/application (67.3ms)
+Completed 200 OK in 224ms (Views: 168.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:33 +0200
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/shared/_links.erb (0.4ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/registrations/new.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 17ms (Views: 15.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:35 +0200
+
+
+Started POST "/users" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Gw5i4L1YBNZw9hC4fd8LjpxrpXnLVPqbpbDep8DqQho=", "user"=>{"email"=>"ahmed.sa3eed_azrk@hotmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'ahmed.sa3eed_azrk@hotmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/shared/_links.erb (0.3ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/registrations/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 163ms (Views: 9.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 13:06:51 +0200
+
+
+Started POST "/users" for 127.0.0.1 at 2014-05-20 13:07:04 +0200
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Gw5i4L1YBNZw9hC4fd8LjpxrpXnLVPqbpbDep8DqQho=", "user"=>{"email"=>"ahmed.sa3eed_azrk@hotmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'ahmed.sa3eed_azrk@hotmail.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `users` (`email`, `encrypted_password`) VALUES ('ahmed.sa3eed_azrk@hotmail.com', '$2a$10$va9Jsu.2Uu9YAsmBbp.Yw.hm8zGvCpynn.PrI73lNHv1NyJfQ5GkK')[0m
+Mysql2::Error: Field 'id' doesn't have a default value: INSERT INTO `users` (`email`, `encrypted_password`) VALUES ('ahmed.sa3eed_azrk@hotmail.com', '$2a$10$va9Jsu.2Uu9YAsmBbp.Yw.hm8zGvCpynn.PrI73lNHv1NyJfQ5GkK')
+  [1m[35m (0.1ms)[0m  ROLLBACK
+Completed 500 Internal Server Error in 84ms
+
+ActiveRecord::StatementInvalid (Mysql2::Error: Field 'id' doesn't have a default value: INSERT INTO `users` (`email`, `encrypted_password`) VALUES ('ahmed.sa3eed_azrk@hotmail.com', '$2a$10$va9Jsu.2Uu9YAsmBbp.Yw.hm8zGvCpynn.PrI73lNHv1NyJfQ5GkK')):
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract_mysql_adapter.rb:301:in `query'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract_mysql_adapter.rb:301:in `block in execute'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract_adapter.rb:373:in `block in log'
+  activesupport (4.1.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract_adapter.rb:367:in `log'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract_mysql_adapter.rb:301:in `execute'
+  activerecord (4.1.1) lib/active_record/connection_adapters/mysql2_adapter.rb:228:in `execute'
+  activerecord (4.1.1) lib/active_record/connection_adapters/mysql2_adapter.rb:250:in `exec_insert'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract/database_statements.rb:105:in `insert'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract/query_cache.rb:14:in `insert'
+  activerecord (4.1.1) lib/active_record/relation.rb:64:in `insert'
+  activerecord (4.1.1) lib/active_record/persistence.rb:502:in `create_record'
+  activerecord (4.1.1) lib/active_record/attribute_methods/dirty.rb:87:in `create_record'
+  activerecord (4.1.1) lib/active_record/callbacks.rb:306:in `block in create_record'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  activerecord (4.1.1) lib/active_record/callbacks.rb:306:in `create_record'
+  activerecord (4.1.1) lib/active_record/timestamp.rb:57:in `create_record'
+  activerecord (4.1.1) lib/active_record/persistence.rb:482:in `create_or_update'
+  activerecord (4.1.1) lib/active_record/callbacks.rb:302:in `block in create_or_update'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  activerecord (4.1.1) lib/active_record/callbacks.rb:302:in `create_or_update'
+  activerecord (4.1.1) lib/active_record/persistence.rb:103:in `save'
+  activerecord (4.1.1) lib/active_record/validations.rb:51:in `save'
+  activerecord (4.1.1) lib/active_record/attribute_methods/dirty.rb:21:in `save'
+  activerecord (4.1.1) lib/active_record/transactions.rb:268:in `block (2 levels) in save'
+  activerecord (4.1.1) lib/active_record/transactions.rb:329:in `block in with_transaction_returning_status'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract/database_statements.rb:211:in `block in transaction'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract/database_statements.rb:219:in `within_new_transaction'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract/database_statements.rb:211:in `transaction'
+  activerecord (4.1.1) lib/active_record/transactions.rb:208:in `transaction'
+  activerecord (4.1.1) lib/active_record/transactions.rb:326:in `with_transaction_returning_status'
+  activerecord (4.1.1) lib/active_record/transactions.rb:268:in `block in save'
+  activerecord (4.1.1) lib/active_record/transactions.rb:283:in `rollback_active_record_state!'
+  activerecord (4.1.1) lib/active_record/transactions.rb:267:in `save'
+  devise (3.2.4) app/controllers/devise/registrations_controller.rb:15:in `create'
+  actionpack (4.1.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.1.1) lib/abstract_controller/base.rb:189:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.1.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:113:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:113:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:229:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:229:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:229:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:149:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:149:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:149:in `block in halting_and_conditional'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:86:in `call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:86:in `run_callbacks'
+  actionpack (4.1.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `block in instrument'
+  activesupport (4.1.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.1.1) lib/active_support/notifications.rb:159:in `instrument'
+  actionpack (4.1.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.1.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.1.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.1.1) lib/abstract_controller/base.rb:136:in `process'
+  actionview (4.1.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.1.1) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.1.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.1.1) lib/action_controller/metal.rb:231:in `block in action'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:80:in `call'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:80:in `dispatch'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:48:in `call'
+  actionpack (4.1.1) lib/action_dispatch/routing/mapper.rb:45:in `call'
+  actionpack (4.1.1) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.1.1) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.1.1) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.1) lib/action_dispatch/routing/route_set.rb:676:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:35:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.1) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.3ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2014-05-20 13:09:32 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Gw5i4L1YBNZw9hC4fd8LjpxrpXnLVPqbpbDep8DqQho=", "user"=>{"email"=>"ahmed.sa3eed_azrk@hotmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'ahmed.sa3eed_azrk@hotmail.com' LIMIT 1[0m
+  [1m[35mSQL (1.4ms)[0m  INSERT INTO `users` (`email`, `encrypted_password`) VALUES ('ahmed.sa3eed_azrk@hotmail.com', '$2a$10$P.HdBTDHdjAGqTWO2vpm5.DnRtjkFw1uCPh1cnYON17X3lM4iVjI6')
+  [1m[36m (6.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE `users` SET `current_sign_in_at` = '2014-05-20 11:09:32', `current_sign_in_ip` = '127.0.0.1', `last_sign_in_at` = '2014-05-20 11:09:32', `last_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1 WHERE `users`.`id` = 1[0m
+  [1m[35m (5.9ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 234ms (ActiveRecord: 15.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-05-20 13:09:32 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/railties-4.1.1/lib/rails/templates/rails/welcome/index.html.erb (2.5ms)
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2014-05-20 13:10:09 +0200
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/esraa/.rvm/rubies/ruby-1.9.3-p545/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (7.8ms)
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545@global/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (61.0ms)
+
+
+Started GET "/users/edit" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+Processing by Devise::RegistrationsController#edit as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered /home/esraa/.rvm/gems/ruby-1.9.3-p545/gems/devise-3.2.4/app/views/devise/registrations/edit.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 105ms (Views: 70.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/booked_rooms.css?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/hotel_pics.css?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/hotels.css?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/rooms.css?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/global/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/global/bootstrap.min.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/global/date_field.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/global/display_results.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/global/jquery.orbit.min.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/global/layout.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/global/signup.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/global/view_hotel.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-20 13:10:29 +0200

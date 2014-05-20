@@ -1,0 +1,37 @@
+<%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.select :user_id, options_for_select(User.all.map{ |s| [s.username] })   %>
+  </div>
+  <div class="field">
+    <%= f.label :head %><br />
+    <%= f.text_field :head %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_field :body %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %><br />
+    <%= f.number_field :rating, :class => 'text_field', :step => 'any'  %>
+  </div>
+  <div class="field">
+    <%= f.label :hotel %><br />
+    <%= f.select :hotel_id, options_for_select(Hotel.all.map{ |s| [s.name, s.id] } %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

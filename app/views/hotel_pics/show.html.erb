@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Hotel:</b>
+  <%= @hotel_pic.hotel %>
+</p>
+
+<p>
+  <b>Avatar:</b>
+  <%= @hotel_pic.avatar %>
+</p>
+
+
+<%= link_to 'Edit', edit_hotel_pic_path(@hotel_pic) %> |
+<%= link_to 'Back', hotel_pics_path %>
