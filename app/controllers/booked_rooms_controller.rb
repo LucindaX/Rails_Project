@@ -40,7 +40,7 @@ class BookedRoomsController < ApplicationController
   # POST /booked_rooms
   # POST /booked_rooms.json
   def create
-    @booked_room = BookedRoom.new(params[:booked_room])
+    @booked_room = BookedRoom.new(booked_room_params)
 
     respond_to do |format|
       if @booked_room.save
@@ -59,7 +59,7 @@ class BookedRoomsController < ApplicationController
     @booked_room = BookedRoom.find(params[:id])
 
     respond_to do |format|
-      if @booked_room.update_attributes(params[:booked_room])
+      if @booked_room.update_attributes(booked_room_params)
         format.html { redirect_to @booked_room, notice: 'Booked room was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +80,45 @@ class BookedRoomsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  # POST /booked_rooms/book/1
+  def book
+	
+ 
+    if  session[:from_date] && session[:to_date]
+
+	from_date = DateTime.parse(session[:from_date]).to_date.to_s
+	to_date = DateTime.parse(session[:to_date]).to_date.to_s
+    	puts "in loop"	
+	params.each do |key, value| 
+		puts key
+	   # target groups using regular expressions
+	      if ( (key =~ /[0-9]+\z/) == 0 )
+		puts "i am herrreeeee"	
+		room = { room_id:key.to_f , hotel_id:params[:id] , quantity:value.to_f , from_date:from_date , to_date:to_date }
+		booking = BookedRoom.new(room)
+		booking.save
+
+              end
+	
+        end
+     
+
+    end
+	
+    respond_to do |format|
+      
+      format.html { redirect_to booked_rooms_url  }
+      format.json { head :no_content }
+    end
+  end
+
+	private
+	
+		def booked_room_params
+	
+			params.require(:booked_room).permit!
+		end
+
 end

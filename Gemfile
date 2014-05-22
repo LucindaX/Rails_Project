@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 
 gem 'carrierwave'
 gem 'devise'
+gem 'mini_magick' , '3.5.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -4,9 +4,95 @@
   <title>App</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <%= csrf_meta_tags %> 
 </head>
 <body>
+
+
+
+
+
+<div class="navbar navbar-blue navbar-static-top">  
+                    <div class="navbar-header">
+                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle</span>
+                        <span class="icon-bar"></span>
+          				<span class="icon-bar"></span>
+          				<span class="icon-bar"></span>
+                      </button>
+                  	</div>
+                  	<nav class="collapse navbar-collapse" role="navigation">
+			
+                    <ul class="nav navbar-nav">
+		
+			<li>
+			<div style="margin-left:300px; margin-right:100px; margin-top:10px;">
+			<font size="5"><strong><i>Sabootel.Com</i></strong></font>
+			</div>
+			</li>
+
+                      <li>
+                        <a href="/myapp/index/"><i class="glyphicon glyphicon-home"></i>&nbsp&nbsp;<strong>Home</strong></a>
+                      </li>
+			
+        		
+                	<li>
+               
+	<!--	<a id='modal_trigger' href='/accounts/logout/'><i class='glyphicon glyphicon-user'>&nbsp&nbsp;</i><strong>SignOut</strong></a>-->
+
+		
+            
+               <a id='modal_trigger' href='/accounts/login/'><i class='glyphicon glyphicon-user'>&nbsp&nbsp;</i><strong>Login/SignUp</strong></a>
+		
+                         </li>           
+                         
+                
+      
+                        </nav> 
+                </div>
+                            <!-- old one -->
+                 <!--   <ul class="nav navbar-nav navbar-right">
+                      <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog" style="right:20px"></i></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="<?=$this->baseUrl();?>/user/profile">My Profile</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?=$this->baseUrl();?>/user/addinfo">Add extra Info</a></li>
+                                    <li><a href="<?=$this->baseUrl();?>/user/editinfo">Edit profile</a></li>
+                                </ul>
+                            </li>
+                          <li><a href="">More</a></li>
+                          <li><a href="">More</a></li>
+                          <li><a href="">More</a></li>
+                          <li><a href="">More</a></li>
+                        </ul>
+                      </li>
+                    </ul>   -->
+                <!-- /top nav -->
+     
+            
+              <!-- /main -->
+          
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -20,11 +106,14 @@
 
 
 
-
+<div id="content" style="margin-top:100px;">
 
 
 
 <%= yield %>
+
+
+</div>
 
 </body>
 </html>

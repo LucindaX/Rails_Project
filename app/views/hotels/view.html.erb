@@ -1,0 +1,195 @@
+	<div id="center" style="width:900px; margin:auto;">
+
+	<div id="hotel_name">
+	<h2><%= @hotel.name %></h2>&nbsp&nbsp&nbsp<span class="stars"><%= @hotel.rating %></span><br>
+	<strong><%= @hotel.city %>,<%= @hotel.country %></strong>
+	</div>
+		<hr>
+
+			<h2>Featured pictures </h2>
+			<div id="featured" style="margin:auto;"> 
+				
+		<% @hotel_pics.each do |pic| %>
+
+			    
+			     <%= image_tag pic.avatar_url , :style => "width:800px;height:400px;clear:both" %>
+			
+			
+			 <%= image_tag pic.avatar_url(:thumb) , :style => "margin-top:340px;display:inline-block;" %>
+			
+			
+
+
+		<% end %>
+			</div>
+			<div style="clear:both;"></div>
+			<div style="clear:both;"></div>
+			<hr>
+		<div id="description" style="margin:auto">
+			<p><%= @hotel.desc %></p>
+		</div>
+
+		
+			
+			
+				
+			
+                        
+
+	
+    <div class="duration"><h2><strong>Rooms available from <%= @from_date %> to <%= @to_date %></strong></h2></div>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>
+							
+							<strong>Room Type</strong>
+						</th>
+						<th>
+							<strong>Features</strong>
+						</th>
+						<th>
+							<strong>Price</strong>
+						</th>
+						<th>
+							<strong>No of rooms</strong>
+						</th>
+					</tr>
+				</thead>
+			<tbody>
+
+			
+				<form action="/booked_rooms/book/<%= @hotel.id %>/" method="POST" >
+			<%= token_tag(nil) %>	
+				<% @rooms.each do |room| %>
+
+
+					<tr>
+						<td>
+							 <%= image_tag room.avatar_url(:thumb) %>
+
+							<strong><%= room.room_type %></strong>
+						</td>
+						<td>	
+							<font color="blue">
+							<%= room.descs %>
+							</font>							
+						</td>
+
+						<td>
+							<%= room.price %> $ / day
+						</td>
+						<td>
+							<select id="<%= room.id %>" name ="<%= room.id %>"  onchange="update_var()">
+							<option value="0" selected="selected">0 .</option>
+							<% if room.has_attribute?(:rooms_left) %>
+								<%  room.rooms_left.times do |i| %>
+								<option value="<%= i+1 %>"> <%= i+1 %> .</option>
+								<% end %>
+							<% else %>
+								<% room.quantity.times do |i| %>
+								<option value="<%= i+1 %>"> <%= i+1 %> .</option>
+								<% end %>
+														
+							<% end %>
+							</select>
+
+						</td>
+					</tr>
+				
+				<% end %>
+				
+					
+				
+			         
+
+					
+					
+				</tbody>
+			</table>
+			<input type="submit" value="Make Booking" class="btn btn_red" onclick="return check();" style="width:200px;"/>
+			</form>
+		</div>
+	</div>
+
+
+
+	<hr>
+
+<!--Comments-->
+	<div id="comments">
+		<h2>Reviews</h2>
+		<% if not @comments.blank? %>
+
+			<% @comments.each do |comment| %>
+
+				<hr>
+
+				<div id="comment">
+					
+					<strong><%= comment.head %></strong>&nbsp&nbsp<span class="stars"><%= comment.rating %></span>&nbsp&nbsp<%= comment.email %><br>
+					<p> <%= comment.body %> </p>
+
+
+				</div>
+				
+		
+			<% end %>
+
+
+		<% else %>
+
+			No Reviews Right Now
+
+		<% end %>
+
+		<!-- if user is authenticated -->
+
+		<div id ="add_comment">
+			<hr>
+			<form action="/comments/add/<%= @hotel.id %>" method="POST">
+			<%= token_tag(nil) %>
+			<label>rating : </label><input type="number" name="rating" step="any" required/>( ?/5 )<br>
+			<label>head : </label><input type="text" name="head" required><br>
+			<label>body : </label><br> <textarea col="4" rows="4" name="body" required></textarea> &nbsp&nbsp <input type="submit" value="Submit">
+		
+			</form>
+
+		</div>
+		<% if user_signed_in? %>
+		<script> 
+
+
+			function add_Review(){
+
+				$('#add_comment').toggle("slow");
+
+			}
+
+		</script>
+
+		<% else %>
+
+		<script>
+
+			function add_Review(){
+
+				window.location.href = '/users/sign_in/';
+
+			}
+		</script>
+
+		<% end %>
+		<div style="height:15px;"></div>
+		<div class="btn btn_red" onclick="add_Review()" style="margin:auto; width:200px;">Add Review</div>
+	</div>	
+
+</div>
+<div id="space"></div>
+
+
+
+
+

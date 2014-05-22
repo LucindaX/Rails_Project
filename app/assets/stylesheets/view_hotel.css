@@ -1,0 +1,52 @@
+span.stars, span.stars span {
+    display: inline-block;
+    background: url(stars.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
+}
+
+#comments {
+background :#F8F8F8;
+padding:10px;
+border:1px;
+border-radius:8px;
+}
+
+#comment {
+
+}
+
+#space{
+
+height:50px;
+
+}
+
+#add_comment{
+
+	display:none;
+
+
+}
+.duration{
+
+	background:#F8F8F8;
+	padding:10px;
+	height:70px;
+	font-size:30;
+	border-radius:4px;
+
+
+}
+
+#add_comment label{
+	width:50px;
+}
+
+#add_comment textarea{
+margin-left:50px;
+}

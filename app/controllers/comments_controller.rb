@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new(comment_params)
 
     respond_to do |format|
       if @comment.save
@@ -59,7 +59,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
 
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
+      if @comment.update_attributes(comment_params)
         format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +80,53 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  #POST /comments/add/1
+  #POST /comments/add/1.json
+  
+  def add
+
+    comment_param = { hotel_id:params[:id] ,head:params[:head] ,rating:params[:rating].to_f ,body:params[:body] ,user_id:session['warden.user.user.key'][0][0].to_f }
+
+    comment = Comment.new(comment_param)    
+
+    hotel = Hotel.find(params[:id])
+    
+    #recalculating average rating
+
+    hotel_rating = (hotel.rating + params[:rating].to_f) / (hotel.votes + 1)
+
+    section = { rating:hotel_rating , votes:(hotel.votes + 1) }
+
+    if hotel.update_attributes(section)
+
+
+    	      if comment.save
+  
+			respond_to do |format|
+
+				format.html { redirect_to  :controller => 'hotels', :action => 'view' , :id => params[:id] }
+			end
+		
+
+		end
+
+	else
+
+		respond_to do |format|
+
+			format.html { render :status => 500 }
+		end
+
+    end
+
+  end
+
+	private
+
+  def comment_params
+    params.require(:comment).permit!
+  end
+
+
 end

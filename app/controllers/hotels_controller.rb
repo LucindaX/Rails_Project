@@ -21,6 +21,36 @@ class HotelsController < ApplicationController
     end
   end
 
+  # GET /view/1
+  # GET /view/1.json
+
+  def view
+
+	puts session.inspect	
+    # you should get these dates from sessions
+    from_date = DateTime.parse("2014/5/22").to_date.to_s
+    to_date = DateTime.parse("2014/5/28").to_date.to_s
+    #range = (from_date)..to_date
+
+    session[:from_date] = "2014/5/22"
+    session[:to_date] = "2014/5/28"
+
+    @hotel = Hotel.find(params[:id])
+    @hotel_pics = HotelPic.where(hotel_id:params[:id])
+    rooms1 = Room.select("rooms.id,rooms.room_type,rooms.price,rooms.avatar,rooms.descs,(rooms.quantity - sum(booked_rooms.quantity)) as rooms_left").joins(:booked_rooms).where("rooms.hotel_id = ? and from_date between ? and ? OR to_date between ? and ?",params[:id],from_date,to_date,from_date,to_date)
+    rooms2 = Room.where("hotel_id = ?",params[:id])
+    @rooms = rooms1 | rooms2 
+    @comments = User.select("comments.head,comments.body,comments.rating,users.email").joins(:comments).where("comments.hotel_id = ?",params[:id])
+    @from_date = from_date
+    @to_date = to_date
+
+	respond_to do |format|
+		
+		format.html
+	end
+  end
+
+
   # GET /hotels/new
   # GET /hotels/new.json
   def new
@@ -40,7 +70,7 @@ class HotelsController < ApplicationController
   # POST /hotels
   # POST /hotels.json
   def create
-    @hotel = Hotel.new(params[:hotel])
+    @hotel = Hotel.new(hotel_params)
 
     respond_to do |format|
       if @hotel.save
@@ -59,7 +89,7 @@ class HotelsController < ApplicationController
     @hotel = Hotel.find(params[:id])
 
     respond_to do |format|
-      if @hotel.update_attributes(params[:hotel])
+      if @hotel.update_attributes(hotel_params)
         format.html { redirect_to @hotel, notice: 'Hotel was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +110,12 @@ class HotelsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+private
+
+  def hotel_params
+    params.require(:hotel).permit(:name,:city,:country,:avatar,:desc ,:rating)
+  end
+
 end

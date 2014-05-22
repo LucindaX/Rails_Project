@@ -3,7 +3,6 @@ class CreateRooms < ActiveRecord::Migration
     create_table :rooms do |t|
       t.column :room_type , :string ,:limit => 50 , :null => false
       t.column :avatar ,:string ,:limit => 50 , :null => false
-      t.column :rating ,:decimal ,:null => false
       t.column :quantity ,:decimal ,:null => false
       t.column :descs ,:text ,:null => false
       t.column :price ,:decimal ,:null => false

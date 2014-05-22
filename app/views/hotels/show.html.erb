@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <b>Desc:</b>
-  <%= @hotel.desc %>
+<b>Desc:</b>
+truncate(<%= @hotel.desc %>,length: 20)
 </p>
 
 <p>

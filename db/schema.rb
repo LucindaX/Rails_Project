@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520104849) do
+ActiveRecord::Schema.define(version: 20140521171838) do
 
   create_table "booked_rooms", force: true do |t|
     t.date     "from_date",  null: false
     t.date     "to_date",    null: false
     t.integer  "quantity",   null: false
-    t.string   "descs",      null: false
     t.integer  "room_id"
     t.integer  "hotel_id"
     t.datetime "created_at"
@@ -41,7 +40,7 @@ ActiveRecord::Schema.define(version: 20140520104849) do
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "hotel_pics", force: true do |t|
-    t.string   "path",       limit: 50, null: false
+    t.string   "avatar",     limit: 50, null: false
     t.integer  "hotel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -50,20 +49,20 @@ ActiveRecord::Schema.define(version: 20140520104849) do
   add_index "hotel_pics", ["hotel_id"], name: "index_hotel_pics_on_hotel_id", using: :btree
 
   create_table "hotels", force: true do |t|
-    t.string   "name",       limit: 25,                          null: false
-    t.string   "avatar",     limit: 50,                          null: false
-    t.string   "city",       limit: 25,                          null: false
-    t.string   "country",    limit: 25,                          null: false
-    t.text     "desc",                                           null: false
-    t.decimal  "rating",                precision: 10, scale: 0, null: false
+    t.string   "name",       limit: 25,                                      null: false
+    t.string   "avatar",     limit: 50,                                      null: false
+    t.string   "city",       limit: 25,                                      null: false
+    t.string   "country",    limit: 25,                                      null: false
+    t.text     "desc",                                                       null: false
+    t.decimal  "rating",                precision: 10, scale: 0,             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "votes",                                          default: 0
   end
 
   create_table "rooms", force: true do |t|
     t.string   "room_type",  limit: 50,                          null: false
     t.string   "avatar",     limit: 50,                          null: false
-    t.decimal  "rating",                precision: 10, scale: 0, null: false
     t.decimal  "quantity",              precision: 10, scale: 0, null: false
     t.text     "descs",                                          null: false
     t.decimal  "price",                 precision: 10, scale: 0, null: false
@@ -75,6 +74,9 @@ ActiveRecord::Schema.define(version: 20140520104849) do
   add_index "rooms", ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree
 
   create_table "users", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

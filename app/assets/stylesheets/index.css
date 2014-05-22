@@ -1,0 +1,28 @@
+#mysearch {
+
+	margin:auto;
+	width: 600px;
+	border-radius:5px;
+	background:#F8F8F8;
+	color:grey;
+	padding:20px;
+
+}
+
+#mysearch form ul{
+
+	list-style:none;
+
+}
+
+#mysearch form label{
+
+	width:100px;
+	clear:both;
+}
+
+#mysearch form input{
+
+	color:black;
+}
+

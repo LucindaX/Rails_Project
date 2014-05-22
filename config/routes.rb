@@ -10,6 +10,12 @@ RailsProject::Application.routes.draw do
 
   resources :hotels
 
+  get 'hotels/view/:id' => 'hotels#view'
+  post 'booked_rooms/book/:id' => 'booked_rooms#book'
+  post 'comments/add/:id' => 'comments#add'
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -4,7 +4,6 @@ class CreateBookedRooms < ActiveRecord::Migration
       t.column :from_date ,:date ,:null => false
       t.column :to_date ,:date ,:null => false
       t.column :quantity ,:integer ,:null => false
-      t.column :descs ,:string ,:null => false
       t.references :room
       t.references :hotel
       t.timestamps

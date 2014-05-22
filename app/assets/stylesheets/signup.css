@@ -1,0 +1,40 @@
+#signup_, #signin{
+
+			width:800px;
+			min-height:200px;
+			border:1px;
+			margin:auto;
+			border-radius:10px;
+			box-shadow:1px 1px 1px;
+			padding:20px;
+			}
+		
+
+		.signup_form,.signin_form{
+		list-style:none;
+		}
+
+		#signup_ li, #signin li{
+
+		margin-top:20px;
+
+		}
+
+		#signup_ li label, #signin li label{
+			display:inline-block;
+			width:200px;
+			clear:both;
+		     }
+
+		#signup_ input, #signin input{
+
+			display:inline-block;
+		     }
+
+		 
+		#signup_ li input[type="submit"], #signin li input[type="submit"]{
+			
+			clear:both;
+			margin-left:350px;
+
+			}

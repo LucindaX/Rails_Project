@@ -40,7 +40,7 @@ class HotelPicsController < ApplicationController
   # POST /hotel_pics
   # POST /hotel_pics.json
   def create
-    @hotel_pic = HotelPic.new(params[:hotel_pic])
+    @hotel_pic = HotelPic.new(hotel_pic_params)
 
     respond_to do |format|
       if @hotel_pic.save
@@ -59,7 +59,7 @@ class HotelPicsController < ApplicationController
     @hotel_pic = HotelPic.find(params[:id])
 
     respond_to do |format|
-      if @hotel_pic.update_attributes(params[:hotel_pic])
+      if @hotel_pic.update_attributes(hotel_pic_params)
         format.html { redirect_to @hotel_pic, notice: 'Hotel pic was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +80,13 @@ class HotelPicsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+	private
+
+  def hotel_pic_params
+    params.require(:hotel_pic).permit!
+  end
+
+
 end

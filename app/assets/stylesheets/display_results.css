@@ -1,0 +1,46 @@
+	.hotel{
+
+				background-color:#F8F8F8;
+				padding:5px; 
+				height:110px;
+				border:1px;
+				margin:auto;
+				border-radius:10px;
+				width:1000px;
+				
+				
+			      }			
+	
+			
+				
+			.hotel_img{
+				
+				display:inline-block;
+				border:5px;
+				vertical-align:middle;
+				padding:10px;	
+				}
+
+			.hotel_info{
+		
+				display:inline-block;
+				margin-left:100px;
+				vertical-align:middle;
+				width:500px;				
+				}
+		
+			.btn_view_hotel{
+
+				display:inline-block;
+				margin-left:20px;
+				width:200px;
+
+				}
+			.space{
+
+
+				height:10px;
+
+
+				}
+			

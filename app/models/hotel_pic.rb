@@ -1,4 +1,4 @@
 class HotelPic < ActiveRecord::Base
-  belongs_to :hotel
-  mount_uploader :path, AvatarUploader
+  has_one :hotel
+  mount_uploader :avatar, AvatarUploader
 end
