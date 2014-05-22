@@ -1,0 +1,60 @@
+
+
+
+	
+		
+	<div id="mysearch">				
+  <form action="/hotels/search/" method="post">
+	<%= token_tag(nil) %>	
+  	
+    
+	<ul>	
+	<li>
+    <label>Destination:</label><input type="text" size="30" name="search_data" placeholder="eg.County,City,Hotel">
+    </li>
+	<li>
+    <label>check_in:</label><input id="id_from_date" name="checkin">
+	</li><br>
+	<li>
+    <label>check_out:</label><input id="id_to_date" name="checkout">
+	</li>
+	</ul>
+    <br>
+
+   <input type="submit" value="Search" class="btn btn_red">
+	</div>
+ </form>
+
+
+
+
+
+		
+		  <%if @city_data %>
+
+     			<% @city_data.each do |hotel| %>
+
+
+			
+			<div class="hotel">
+			
+					<div class="hotel_img"><img src="<%= hotel.avatar_url %>" width="100" height="80"></div>
+					<div class="hotel_info">
+						<strong><%= hotel.name %></strong>,&nbsp<%= hotel.city %>,&nbsp<%= hotel.country %>&nbsp&nbsp<span class="stars"><%= hotel.rating %></span><br><%= truncate(hotel.desc,length:10) %>
+					</div>
+					<div class="btn_view_hotel"><a href="/hotels/view/<%= hotel.id %>/" class="btn btn_red">View Hotel</a></div>
+				
+					
+			</div>
+			<div class="space"></div>
+			   <% end %>
+		    <%end%>
+
+
+
+	
+			
+
+
+
+	

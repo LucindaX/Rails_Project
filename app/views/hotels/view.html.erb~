@@ -65,7 +65,7 @@
 			<%= token_tag(nil) %>	
 				<% @rooms.each do |room| %>
 
-					<% if room.id.blank? == false %>
+
 					<tr>
 						<td>
 							 <%= image_tag room.avatar_url(:thumb) %>
@@ -98,7 +98,6 @@
 
 						</td>
 					</tr>
-					<% end %>
 				
 				<% end %>
 				
@@ -110,14 +109,8 @@
 					
 				</tbody>
 			</table>
-		<% if user_signed_in? %>
 			<input type="submit" value="Make Booking" class="btn btn_red" onclick="return check();" style="width:200px;"/>
-		<% else %>
-			<a href='/users/sign_in' class="btn btn_red" style="width:200px;">Make Booking</a>
-		<% end %>		
-
-
-	</form>
+			</form>
 		</div>
 	</div>
 
